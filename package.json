@@ -1,0 +1,14 @@
+{
+  "name": "weird-chess",
+  "version": "3.5.0",
+  "private": true,
+  "description": "Purple-themed Weird Chess with Stockfish-powered bot tiers.",
+  "scripts": {
+    "postinstall": "node scripts/copy-stockfish.js",
+    "start": "node server.js",
+    "test": "node --check public/game-seed.js && node --check public/game-core-1.js && node --check public/game-core-2.js && node --check public/game-core-3.js && node --check public/game-core-4.js && node --check public/game-bot.js && node --check public/game-v34-a.js && node --check public/game-v34-b.js && node --check public/game-v35.js"
+  },
+  "dependencies": {
+    "stockfish": "18.0.8"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Weird Chess",
+  "short_name": "WeirdChess",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#100817",
+  "theme_color": "#130b20",
+  "description": "Two-player Weird Chess with bot difficulties up to StorkPiss.",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
