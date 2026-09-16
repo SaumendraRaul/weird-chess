@@ -37,12 +37,15 @@ body[data-chaos-tier="4"] .board-wrap{filter:drop-shadow(0 0 13px #ff57ba44)}
 .history-actions{display:flex;gap:6px;margin-top:8px}.history-actions button{min-height:32px;padding:0 9px;font-size:9px}
 .end-actions{grid-template-columns:1fr 1fr!important}
 .spectator-badge{font-size:8px;padding:3px 6px;border-radius:99px;border:1px dashed #a970ff66;color:#d9c3ff}
+
+/* Match view: no page scrolling. Secondary information lives in a drawer. */
 body.playing{height:100dvh;overflow:hidden}
 body.playing .app{height:100dvh;max-height:100dvh;padding-bottom:6px;display:flex;flex-direction:column}
 body.playing .topbar{display:none}
 body.playing #game{height:100%;min-height:0;display:flex;flex-direction:column}
 body.playing .game-layout{flex:1;min-height:0}
 body.playing .footer-note{display:none}
+
 @media(max-width:800px){
   body.playing .app{padding:5px 6px}
   body.playing .game-header{grid-template-columns:38px 1fr auto 38px;gap:6px;margin-bottom:3px;min-height:40px}
@@ -62,18 +65,34 @@ body.playing .footer-note{display:none}
   body.playing .gate-chip{font-size:7px;padding:3px 5px}.gate-arrow{font-size:10px}
   body.playing .chaos-meter{position:absolute;z-index:8;left:12px;right:12px;bottom:44px;margin:0;pointer-events:none;opacity:.8}
   body.playing .board-column{position:relative}
-  body.playing .board-wrap{align-self:center;justify-self:center;width:min(calc(100vw - 12px),calc(100dvh - 164px));height:min(calc(100vw - 12px),calc(100dvh - 164px));padding:4px;border-radius:16px}
+  body.playing .board-wrap{
+    align-self:center;justify-self:center;
+    width:min(calc(100vw - 12px),calc(100dvh - 164px));
+    height:min(calc(100vw - 12px),calc(100dvh - 164px));
+    padding:4px;border-radius:16px
+  }
   body.playing .board{height:100%}
   body.playing .sq{font-size:clamp(26px,11vw,56px)}
   body.playing .face{font-size:clamp(6px,2.5vw,10px)}
-  body.playing .side-stack{position:fixed;z-index:12000;left:0;right:0;bottom:0;max-height:62dvh;overflow:auto;padding:10px 10px calc(10px + env(safe-area-inset-bottom));display:grid;gap:8px;background:linear-gradient(180deg,#251436fa,#120a1dfd);border:1px solid var(--line);border-radius:22px 22px 0 0;box-shadow:0 -20px 50px #0009;transform:translateY(105%);transition:transform .2s ease}
+  body.playing .side-stack{
+    position:fixed;z-index:12000;left:0;right:0;bottom:0;max-height:62dvh;overflow:auto;
+    padding:10px 10px calc(10px + env(safe-area-inset-bottom));display:grid;gap:8px;
+    background:linear-gradient(180deg,#251436fa,#120a1dfd);border:1px solid var(--line);
+    border-radius:22px 22px 0 0;box-shadow:0 -20px 50px #0009;
+    transform:translateY(105%);transition:transform .2s ease
+  }
   body.playing .side-stack.open{transform:translateY(0)}
   body.playing .drawer-head{display:flex;align-items:center;justify-content:space-between;position:sticky;top:-10px;z-index:4;padding:8px 2px;background:#241434}
   body.playing .side-card{padding:10px;border-radius:14px}
   body.playing .move-list{max-height:145px}
   .v34-advanced-grid{grid-template-columns:1fr}
 }
-@media(max-width:520px){.settings-grid,.achievement-grid{grid-template-columns:1fr}.tool-row .btn{flex:1 1 42%}}
+@media(max-width:520px){
+  .settings-grid,.achievement-grid{grid-template-columns:1fr}
+  .tool-row .btn{flex:1 1 42%}
+}
+
+/* ===== Weird Chess v3.5 game modes ===== */
 .mode-select-row{display:grid;grid-template-columns:1fr auto;gap:7px}
 .mode-desc{font-size:10px;color:var(--muted);line-height:1.45;margin-top:7px;padding:8px 9px;border-radius:11px;background:#ffffff06;border:1px solid var(--line)}
 .game-pills{display:flex;align-items:center;gap:6px}
@@ -94,4 +113,16 @@ body.playing .footer-note{display:none}
 .mode-progress{font-size:9px;padding:5px 7px;border-radius:9px;background:#ffffff09;border:1px solid var(--line);color:#eadcf8}
 .infection-flash{animation:infectionPulse .5s ease}
 @keyframes infectionPulse{50%{filter:drop-shadow(0 0 13px #72ff9f)}}
-@media(max-width:520px){.mode-config-grid{grid-template-columns:1fr}.mode-select-row{grid-template-columns:1fr 92px}.game-pills{gap:3px}.mode-pill{max-width:92px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+@media(max-width:520px){
+  .mode-config-grid{grid-template-columns:1fr}
+  .mode-select-row{grid-template-columns:1fr 92px}
+  .game-pills{gap:3px}.mode-pill{max-width:92px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+}
+
+/* Desktop/tablet scroll fix: keep the no-scroll game shell mobile-only. */
+@media(min-width:801px){
+  body.playing{height:auto;min-height:100vh;overflow-x:hidden;overflow-y:auto}
+  body.playing .app{height:auto;max-height:none;min-height:100vh;display:block;padding-bottom:24px}
+  body.playing #game{height:auto;min-height:0;display:block}
+  body.playing .game-layout{min-height:0}
+}
