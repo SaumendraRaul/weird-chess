@@ -43,6 +43,11 @@ the built-in Weird Engine instead.
 Host the `public/` folder over HTTPS (GitHub Pages, Netlify, Vercel, etc.), open
 the site in Chrome on Android, and choose **Add to Home screen / Install app**.
 
+## GitHub Pages deployment
+
+The repository includes `.github/workflows/deploy-pages.yml`.
+Every push to `main` installs Stockfish, runs the JavaScript syntax checks, and deploys the `public/` directory through GitHub Pages.
+
 ## Stockfish
 
 This project uses the `stockfish` npm package (Stockfish.js / Stockfish 18),
